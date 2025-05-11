@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-container">
+    <!-- Header with back and logout buttons -->
+    <div class="page-header">
+        <a href="{{ previous_url }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Back
+        </a>
+        <form action="{{ url_for('logout') }}" method="post">
+            <button type="submit" class="btn btn-danger">LOGOUT</button>
+        </form>
+    </div>
+
+    <!-- Page content -->
+    <h1 class="page-title">Add Courses</h1>
+
+    <!-- Rest of your existing content -->
+    <div class="container">
+        <div class="course-sections">
+            <!-- Available Courses -->
+            <div class="course-section">
+                <h2>Available Courses</h2>
+                <div class="course-list">
+                    {% if available_courses %}
+                        {% for course in available_courses %}
+                            <div class="course-card">
+                                <h3>{{ course.course_name }}</h3>
+                                <p class="course-description">{{ course.description }}</p>
+                                <form method="POST" action="{{ url_for('save_course') }}">
+                                    <input type="hidden" name="course_id" value="{{ course.id }}">
+                                    <button type="submit" class="btn btn-primary">Save Course</button>
+                                </form>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="no-courses">All courses have been saved.</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Saved Courses -->
+            <div class="course-section">
+                <h2>Saved Courses</h2>
+                <div class="course-list">
+                    {% if saved_courses %}
+                        {% for course in saved_courses %}
+                            <div class="course-card">
+                                <h3>{{ course[1] }}</h3>
+                                <p class="course-description">{{ course[2] }}</p>
+                                <div class="course-actions">
+                                    <form method="POST" action="{{ url_for('remove_course') }}" class="inline-form">
+                                        <input type="hidden" name="course_id" value="{{ course[0] }}">
+                                        <button type="submit" class="btn btn-danger">Remove</button>
+                                    </form>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="no-courses">No courses saved yet.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.page-title {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+/* Add your existing styles here */
+</style>
+{% endblock %}

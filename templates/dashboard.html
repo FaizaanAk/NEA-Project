@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}StudyCore - Dashboard{% endblock %}
+
+{% if session.username %}
+    {% if is_admin %}
+        <a href="{{ url_for('admin_dashboard') }}">Admin Dashboard</a>
+    {% endif %}
+{% endif %}
+
+{% block content %}
+<div class="dashboard-container">
+    <!-- Logout button in top right -->
+    <div class="dashboard-header">
+        <form action="{{ url_for('logout') }}" method="post">
+            <button type="submit" class="btn btn-danger">LOGOUT</button>
+        </form>
+    </div>
+
+    <!-- Welcome message -->
+    <h1 class="dashboard-title">Welcome, {{ session['username'] }}</h1>
+
+    <!-- Dashboard grid -->
+    <div class="dashboard-grid">
+        <a href="{{ url_for('add_course') }}" class="dashboard-card">
+            <div class="card-icon">📚</div>
+            <h3>Add Course</h3>
+        </a>
+        <a href="{{ url_for('select_course') }}" class="dashboard-card">
+            <div class="card-icon">📖</div>
+            <h3>Select Course</h3>
+        </a>
+        <a href="{{ url_for('user_profile') }}" class="dashboard-card">
+            <div class="card-icon">👤</div>
+            <h3>Profile</h3>
+        </a>
+    </div>
+</div>
+
+<style>
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 2rem;
+}
+
+.dashboard-title {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.dashboard-card {
+    background: var(--card-dark);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    text-decoration: none;
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.dashboard-card h3 {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .dashboard-title {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+}
+</style>
+{% endblock %}
