@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="notes-container">
+    <div class="page-header">
+        <a href="{{ previous_url }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Back
+        </a>
+    </div>
+
+    <h1 class="page-title">{{ topic_name }} Notes</h1>
+
+    <div class="notes-grid">
+        {% if subtopics %}
+            {% for subtopic in subtopics %}
+                <a href="{{ url_for('view_notes', topic_id=topic_id, subtopic=subtopic) }}" class="note-card">
+                    <h3>{{ loop.index }}. {{ subtopic }}</h3>
+                </a>
+            {% endfor %}
+        {% else %}
+            <div class="no-notes">
+                <p>No notes available for this topic yet.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<style>
+.notes-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.page-title {
+    color: var(--primary-color);
+    font-size: 2rem;
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.notes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.note-card {
+    background: var(--card-dark);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.note-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+}
+
+.note-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.page-header {
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+}
+
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+[data-theme="light"] .btn-secondary {
+    background: rgb(241, 245, 249);
+    color: black;
+}
+
+[data-theme="dark"] .btn-secondary {
+    background: #475569;
+    color: white;
+}
+
+.btn-secondary:hover {
+    transform: translateY(-2px);
+}
+
+[data-theme="dark"] .btn-secondary:hover {
+    background: #334155;
+}
+
+.no-notes {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 2rem;
+    background: var(--card-dark);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+</style>
+{% endblock %} 

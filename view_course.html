@@ -1,0 +1,873 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="course-container">
+    <!-- Back button -->
+    <div class="page-header">
+        <a href="{{ previous_url }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Back
+        </a>
+    </div>
+
+    <div class="course-header">
+        <!-- Progress Circle -->
+        <div class="progress-circle-container">
+            <div class="progress-circle">
+                <div class="progress-ring" style="--progress: {{ '%.1f'|format(progress) }}">
+                    <div class="progress-text">
+                        <span class="progress-percentage">{{ '%.1f'|format(progress) }}%</span>
+                        <span class="progress-label">Completion Rate</span>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ url_for('progress_report', course_id=course[0]) }}" class="progress-report-btn">
+                <i class="fas fa-chart-line"></i>
+                View Progress Report
+            </a>
+        </div>
+
+        <!-- Course Info -->
+        <div class="course-info">
+            <h1 class="course-title">{{ course[1] }}</h1>
+            <p class="course-description">{{ course[2] }}</p>
+        </div>
+    </div>
+
+    <div class="topics-container">
+        {% if course[1] == "Maths" %}
+            <a href="{{ url_for('personalised_test', course_id=course[0]) }}" class="topic-item special">Personalised Test</a>
+            
+            <div class="year-legend">
+                <div class="legend-item">
+                    <div class="legend-color year-1"></div>
+                    <span>Year 1</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color year-2"></div>
+                    <span>Year 2</span>
+                </div>
+            </div>
+
+            <!-- Pure Mathematics -->
+            <div class="topic-section">
+                <h2 class="topic-section-title">Pure Mathematics</h2>
+                <div class="topic-list">
+                    <!-- Year 1 -->
+                    <div class="year-group">
+                        <h3 class="year-title">Year 1</h3>
+                        <div class="topic-grid">
+                            <a href="{{ url_for('view_subtopics', topic_id=1) }}" class="topic-item year-1">
+                                <span class="topic-name">Algebraic expressions</span>
+                                <span class="topic-progress">0/6</span>
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=2) }}" class="topic-item year-1">
+                                <span class="topic-name">Quadratics</span>
+                                <span class="topic-progress">0/6</span>
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=3) }}" class="topic-item year-1">
+                                <span class="topic-name">Equations and inequalities</span>
+                                <span class="topic-progress">0/7</span>
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=4) }}" class="topic-item year-1">
+                                <span class="topic-name">Graphs and transformations</span>
+                                <span class="topic-progress">0/7</span>
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=5) }}" class="topic-item year-1">
+                                <span class="topic-name">Straight line graphs</span>
+                                <span class="topic-progress">0/4</span>
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=6) }}" class="topic-item year-1">
+                                <span class="topic-name">Circles</span>
+                                <span class="topic-progress">0/5</span>
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=7) }}" class="topic-item year-1">
+                                <span class="topic-name">Algebraic methods</span>
+                                <span class="topic-progress">0/5</span>
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=8) }}" class="topic-item year-1">
+                                <span class="topic-name">The binomial expansion</span>
+                                <span class="topic-progress">0/5</span>
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=9) }}" class="topic-item year-1">
+                                <span class="topic-name">Trigonometric ratios</span>
+                                <span class="topic-progress">0/6</span>
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=10) }}" class="topic-item year-1">
+                                <span class="topic-name">Trigonometric identities</span>
+                                <span class="topic-progress">0/6</span>
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=11) }}" class="topic-item year-1">
+                                <span class="topic-name">Vectors</span>
+                                <span class="topic-progress">0/6</span>
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=12) }}" class="topic-item year-1">
+                                <span class="topic-name">Differentiation</span>
+                                <span class="topic-progress">0/11</span>
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=13) }}" class="topic-item year-1">
+                                <span class="topic-name">Integration</span>
+                                <span class="topic-progress">0/7</span>
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=14) }}" class="topic-item year-1">
+                                <span class="topic-name">Exponentials and logarithms</span>
+                                <span class="topic-progress">0/7</span>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Year 2 -->
+                    <div class="year-group">
+                        <h3 class="year-title">Year 2</h3>
+                        <p class="coming-soon">Topics coming soon...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics -->
+            <div class="topic-section">
+                <h2 class="topic-section-title">Statistics</h2>
+                <div class="topic-list">
+                    <!-- Year 1 -->
+                    <div class="year-group">
+                        <h3 class="year-title">Year 1</h3>
+                        <div class="topic-grid">
+                            <a href="{{ url_for('view_subtopics', topic_id=15) }}" class="topic-item year-1">
+                                <span class="topic-name">Data presentation</span>
+                                <span class="topic-progress">0/3</span>
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=16) }}" class="topic-item year-1">
+                                <span class="topic-name">Probability</span>
+                                <span class="topic-progress">0/3</span>
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=17) }}" class="topic-item year-1">
+                                <span class="topic-name">Statistical distributions</span>
+                                <span class="topic-progress">0/4</span>
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=18) }}" class="topic-item year-1">
+                                <span class="topic-name">Hypothesis testing</span>
+                                <span class="topic-progress">0/3</span>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Year 2 -->
+                    <div class="year-group">
+                        <h3 class="year-title">Year 2</h3>
+                        <p class="coming-soon">Topics coming soon...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mechanics -->
+            <div class="topic-section">
+                <h2 class="topic-section-title">Mechanics</h2>
+                <div class="topic-list">
+                    <!-- Year 1 -->
+                    <div class="year-group">
+                        <h3 class="year-title">Year 1</h3>
+                        <div class="topic-grid">
+                            <a href="{{ url_for('view_subtopics', topic_id=22) }}" class="topic-item year-1">
+                                <span class="topic-name">Kinematics</span>
+                                <span class="topic-progress">0/4</span>
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=23) }}" class="topic-item year-1">
+                                <span class="topic-name">Forces and Newton's laws</span>
+                                <span class="topic-progress">0/5</span>
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=24) }}" class="topic-item year-1">
+                                <span class="topic-name">Variable acceleration</span>
+                                <span class="topic-progress">0/3</span>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Year 2 -->
+                    <div class="year-group">
+                        <h3 class="year-title">Year 2</h3>
+                        <p class="coming-soon">Topics coming soon...</p>
+                    </div>
+                </div>
+            </div>
+        {% elif course[1] == "Economics" %}
+            <a href="{{ url_for('personalised_test', course_id=course[0]) }}" class="topic-item special">Personalised Test</a>
+            
+            <div class="year-legend">
+                <div class="legend-item">
+                    <div class="legend-color year-1"></div>
+                    <span>Year 1</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color year-2"></div>
+                    <span>Year 2</span>
+                </div>
+            </div>
+
+            <!-- Microeconomics -->
+            <div class="topic-section">
+                <h2 class="topic-section-title">Microeconomics</h2>
+                <div class="topic-list">
+                    <!-- Year 1 -->
+                    <div class="year-group">
+                        <h3 class="year-title">Year 1</h3>
+                        <div class="topic-grid">
+                            <a href="{{ url_for('view_subtopics', topic_id=40) }}" class="topic-item year-1">
+                                <span class="topic-name">Nature of Economics</span>
+                                {% if topics_completion and topics_completion[40] %}
+                                    <span class="topic-progress">{{ topics_completion[40]['completed'] }}/{{ topics_completion[40]['total'] }}</span>
+                                {% endif %}
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=41) }}" class="topic-item year-1">
+                                <span class="topic-name">Demand and Supply</span>
+                                {% if topics_completion and topics_completion[41] %}
+                                    <span class="topic-progress">{{ topics_completion[41]['completed'] }}/{{ topics_completion[41]['total'] }}</span>
+                                {% endif %}
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=42) }}" class="topic-item year-1">
+                                <span class="topic-name">Market Mechanics and Consumer Behavior</span>
+                                {% if topics_completion and topics_completion[42] %}
+                                    <span class="topic-progress">{{ topics_completion[42]['completed'] }}/{{ topics_completion[42]['total'] }}</span>
+                                {% endif %}
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=43) }}" class="topic-item year-1">
+                                <span class="topic-name">Market Failure</span>
+                                {% if topics_completion and topics_completion[43] %}
+                                    <span class="topic-progress">{{ topics_completion[43]['completed'] }}/{{ topics_completion[43]['total'] }}</span>
+                                {% endif %}
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=44) }}" class="topic-item year-1">
+                                <span class="topic-name">Government Intervention</span>
+                                {% if topics_completion and topics_completion[44] %}
+                                    <span class="topic-progress">{{ topics_completion[44]['completed'] }}/{{ topics_completion[44]['total'] }}</span>
+                                {% endif %}
+                            </a>
+                            <!-- Add flashcard button for Year 1 Microeconomics -->
+                            <div class="mixed-practice-container">
+                                <a href="{{ url_for('view_flashcards', topic_id=40, subtopic='Microeconomics_1') }}" class="mixed-practice-button year-1">
+                                    <span class="mixed-practice-icon">📚</span>
+                                    <span class="mixed-practice-text">Mixed Practice</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Year 2 -->
+                    <div class="year-group">
+                        <h3 class="year-title">Year 2</h3>
+                        <div class="topic-grid">
+                            <a href="{{ url_for('view_subtopics', topic_id=60) }}" class="topic-item year-2">
+                                <span class="topic-name">Business Growth</span>
+                                {% if topics_completion and topics_completion[60] %}
+                                    <span class="topic-progress">{{ topics_completion[60]['completed'] }}/{{ topics_completion[60]['total'] }}</span>
+                                {% endif %}
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=61) }}" class="topic-item year-2">
+                                <span class="topic-name">Business Objectives</span>
+                                {% if topics_completion and topics_completion[61] %}
+                                    <span class="topic-progress">{{ topics_completion[61]['completed'] }}/{{ topics_completion[61]['total'] }}</span>
+                                {% endif %}
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=62) }}" class="topic-item year-2">
+                                <span class="topic-name">Revenues, Costs and Profits</span>
+                                {% if topics_completion and topics_completion[62] %}
+                                    <span class="topic-progress">{{ topics_completion[62]['completed'] }}/{{ topics_completion[62]['total'] }}</span>
+                                {% endif %}
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=63) }}" class="topic-item year-2">
+                                <span class="topic-name">Market Structures</span>
+                                {% if topics_completion and topics_completion[63] %}
+                                    <span class="topic-progress">{{ topics_completion[63]['completed'] }}/{{ topics_completion[63]['total'] }}</span>
+                                {% endif %}
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=64) }}" class="topic-item year-2">
+                                <span class="topic-name">Labour Markets</span>
+                                {% if topics_completion and topics_completion[64] %}
+                                    <span class="topic-progress">{{ topics_completion[64]['completed'] }}/{{ topics_completion[64]['total'] }}</span>
+                                {% endif %}
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=65) }}" class="topic-item year-2">
+                                <span class="topic-name">Government Intervention</span>
+                                {% if topics_completion and topics_completion[65] %}
+                                    <span class="topic-progress">{{ topics_completion[65]['completed'] }}/{{ topics_completion[65]['total'] }}</span>
+                                {% endif %}
+                            </a>
+                            <!-- Add flashcard button for Year 2 Microeconomics -->
+                            <div class="mixed-practice-container">
+                                <a href="{{ url_for('view_flashcards', topic_id=60, subtopic='Microeconomics_2') }}" class="mixed-practice-button year-2">
+                                    <span class="mixed-practice-icon">📚</span>
+                                    <span class="mixed-practice-text">Mixed Practice</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Macroeconomics -->
+            <div class="topic-section">
+                <h2 class="topic-section-title">Macroeconomics</h2>
+                <div class="topic-list">
+                    <!-- Year 1 -->
+                    <div class="year-group">
+                        <h3 class="year-title">Year 1</h3>
+                        <div class="topic-grid">
+                            <a href="{{ url_for('view_subtopics', topic_id=50) }}" class="topic-item year-1">
+                                <span class="topic-name">Measures of Economic Performance</span>
+                                {% if topics_completion and topics_completion[50] %}
+                                    <span class="topic-progress">{{ topics_completion[50]['completed'] }}/{{ topics_completion[50]['total'] }}</span>
+                                {% endif %}
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=51) }}" class="topic-item year-1">
+                                <span class="topic-name">Aggregate Demand</span>
+                                {% if topics_completion and topics_completion[51] %}
+                                    <span class="topic-progress">{{ topics_completion[51]['completed'] }}/{{ topics_completion[51]['total'] }}</span>
+                                {% endif %}
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=52) }}" class="topic-item year-1">
+                                <span class="topic-name">Aggregate Supply</span>
+                                {% if topics_completion and topics_completion[52] %}
+                                    <span class="topic-progress">{{ topics_completion[52]['completed'] }}/{{ topics_completion[52]['total'] }}</span>
+                                {% endif %}
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=53) }}" class="topic-item year-1">
+                                <span class="topic-name">National Income</span>
+                                {% if topics_completion and topics_completion[53] %}
+                                    <span class="topic-progress">{{ topics_completion[53]['completed'] }}/{{ topics_completion[53]['total'] }}</span>
+                                {% endif %}
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=54) }}" class="topic-item year-1">
+                                <span class="topic-name">Economic Growth</span>
+                                {% if topics_completion and topics_completion[54] %}
+                                    <span class="topic-progress">{{ topics_completion[54]['completed'] }}/{{ topics_completion[54]['total'] }}</span>
+                                {% endif %}
+                            <a href="{{ url_for('view_subtopics', topic_id=55) }}" class="topic-item year-1">
+                                <span class="topic-name">Macroeconomic Objectives and Policies</span>
+                                {% if topics_completion and topics_completion[55] %}
+                                    <span class="topic-progress">{{ topics_completion[55]['completed'] }}/{{ topics_completion[55]['total'] }}</span>
+                                {% endif %}
+                            </a>
+                            <!-- Add flashcard button for Year 1 Macroeconomics -->
+                            <div class="mixed-practice-container">
+                                <a href="{{ url_for('view_flashcards', topic_id=50, subtopic='Macroeconomics_1') }}" class="mixed-practice-button year-1">
+                                    <span class="mixed-practice-icon">📚</span>
+                                    <span class="mixed-practice-text">Mixed Practice</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Year 2 -->
+                    <div class="year-group">
+                        <h3 class="year-title">Year 2</h3>
+                        <div class="topic-grid">
+                            <a href="{{ url_for('view_subtopics', topic_id=70) }}" class="topic-item year-2">
+                                <span class="topic-name">International Economics</span>
+                                {% if topics_completion and topics_completion[70] %}
+                                    <span class="topic-progress">{{ topics_completion[70]['completed'] }}/{{ topics_completion[70]['total'] }}</span>
+                                {% endif %}
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=71) }}" class="topic-item year-2">
+                                <span class="topic-name">Poverty and Inequality</span>
+                                {% if topics_completion and topics_completion[71] %}
+                                    <span class="topic-progress">{{ topics_completion[71]['completed'] }}/{{ topics_completion[71]['total'] }}</span>
+                                {% endif %}
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=72) }}" class="topic-item year-2">
+                                <span class="topic-name">Emerging and Developing Economies</span>
+                                {% if topics_completion and topics_completion[72] %}
+                                    <span class="topic-progress">{{ topics_completion[72]['completed'] }}/{{ topics_completion[72]['total'] }}</span>
+                                {% endif %}
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=73) }}" class="topic-item year-2">
+                                <span class="topic-name">The Financial Sector</span>
+                                {% if topics_completion and topics_completion[73] %}
+                                    <span class="topic-progress">{{ topics_completion[73]['completed'] }}/{{ topics_completion[73]['total'] }}</span>
+                                {% endif %}
+                            </a>
+                            <a href="{{ url_for('view_subtopics', topic_id=74) }}" class="topic-item year-2">
+                                <span class="topic-name">Role of the State in the Macroeconomy</span>
+                                {% if topics_completion and topics_completion[74] %}
+                                    <span class="topic-progress">{{ topics_completion[74]['completed'] }}/{{ topics_completion[74]['total'] }}</span>
+                                {% endif %}
+                            </a>
+                            <!-- Add flashcard button for Year 2 Macroeconomics -->
+                            <div class="mixed-practice-container">
+                                <a href="{{ url_for('view_flashcards', topic_id=71, subtopic='Macroeconomics_2') }}" class="mixed-practice-button year-2">
+                                    <span class="mixed-practice-icon">📚</span>
+                                    <span class="mixed-practice-text">Mixed Practice</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<style>
+.course-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.course-header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+    align-items: center;
+}
+
+.progress-circle-container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.progress-circle {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+}
+
+.progress-ring {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: conic-gradient(
+        var(--primary-color) calc(var(--progress) * 1%),
+        var(--background-dark) 0deg
+    );
+    position: relative;
+}
+
+.progress-ring::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border-radius: 50%;
+    background: var(--card-dark);
+}
+
+.progress-text {
+    position: relative;
+    text-align: center;
+    z-index: 1;
+}
+
+.progress-percentage {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.progress-label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.progress-title {
+    margin-top: 1rem;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+}
+
+.course-info {
+    padding-right: 2rem;
+}
+
+.course-title {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.course-description {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.topics-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.topic-section {
+    background: var(--card-dark);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+}
+
+.topic-section-title {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.topic-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.year-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.year-title {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    padding-left: 1rem;
+    border-left: 4px solid;
+}
+
+.year-group:nth-child(1) .year-title {
+    border-color: #4CAF50;
+}
+
+.year-group:nth-child(2) .year-title {
+    border-color: #2196F3;
+}
+
+.topic-item {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    background: var(--card-dark);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.topic-item:hover {
+    transform: translateY(-3px);
+    border-color: var(--primary-color);
+}
+
+.topic-name {
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 500;
+    flex: 1;
+}
+
+.topic-progress {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.25rem 0.75rem;
+    background: var(--bg-primary);
+    border-radius: 1rem;
+    margin-left: 1rem;
+}
+
+.topic-item.year-1 {
+    border-left: 4px solid var(--year1-color);
+}
+
+.topic-item.year-2 {
+    border-left: 4px solid var(--year2-color);
+}
+
+.topic-item.special {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    border: none;
+}
+
+.topic-item.special .topic-name {
+    color: white;
+    font-weight: 600;
+}
+
+.topic-section-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.topic-section-title::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: var(--border-color);
+}
+
+/* Add a legend at the top of topics container */
+.topics-container::before {
+    content: '';
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.year-legend {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.legend-color {
+    width: 20px;
+    height: 4px;
+    border-radius: 2px;
+}
+
+.legend-color.year-1 {
+    background: #4CAF50;
+}
+
+.legend-color.year-2 {
+    background: #2196F3;
+}
+
+@media (max-width: 1024px) {
+    .topic-list {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .year-group {
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .course-header {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .progress-circle {
+        width: 150px;
+        height: 150px;
+    }
+
+    .progress-percentage {
+        font-size: 2rem;
+    }
+
+    .topic-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .topic-section {
+        padding: 1.5rem;
+    }
+    
+    .topic-section-title {
+        font-size: 1.3rem;
+    }
+}
+
+.topic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.topic-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 1.5rem;
+    background: var(--background-dark);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: var(--text-primary);
+}
+
+.topic-item:hover {
+    transform: translateX(10px);
+    border-color: var(--primary-color);
+    background: var(--card-dark);
+}
+
+.topic-name {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.topic-progress {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    background: var(--card-dark);
+    padding: 0.3rem 0.8rem;
+    border-radius: 1rem;
+}
+
+.coming-soon {
+    color: var(--text-secondary);
+    font-style: italic;
+    text-align: center;
+    padding: 2rem;
+    background: var(--background-dark);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+}
+
+.topic-section {
+    background: var(--card-dark);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.year-title {
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+@media (max-width: 768px) {
+    .topic-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .topic-item {
+        padding: 1rem;
+    }
+}
+
+/* Add this new style for special topic item hover */
+.topic-item.special:hover {
+    transform: translateY(-5px);  /* Move up instead of right */
+    background: var(--primary-color);  /* Keep the background color */
+    color: var(--background-dark);  /* Keep the text color */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);  /* Add shadow for depth */
+}
+
+/* Update the regular topic-item hover to not affect special items */
+.topic-item:not(.special):hover {
+    transform: translateX(10px);
+    border-color: var(--primary-color);
+    background: var(--card-dark);
+}
+
+/* Style for Mixed Practice buttons */
+.mixed-practice-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.mixed-practice-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--card-dark);
+    color: var(--text-primary);
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: none;
+    min-width: 180px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.mixed-practice-button.year-1 {
+    background: linear-gradient(145deg, #1e2938, var(--card-dark));
+    border-bottom: 3px solid #4CAF50;
+}
+
+.mixed-practice-button.year-2 {
+    background: linear-gradient(145deg, #1e2938, var(--card-dark));
+    border-bottom: 3px solid #2196F3;
+}
+
+.mixed-practice-icon {
+    font-size: 1.2rem;
+}
+
+.mixed-practice-text {
+    font-weight: 600;
+}
+
+.mixed-practice-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.mixed-practice-button.year-1:hover {
+    background: linear-gradient(145deg, var(--card-dark), #1e2938);
+    color: #4CAF50;
+}
+
+.mixed-practice-button.year-2:hover {
+    background: linear-gradient(145deg, var(--card-dark), #1e2938);
+    color: #2196F3;
+}
+
+/* Remove old flashcard button styles */
+.flashcard-button {
+    display: none;
+}
+
+.progress-report-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #2196F3;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(33, 150, 243, 0.3);
+    width: fit-content;
+}
+
+.progress-report-btn:hover {
+    background: #1976D2;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(33, 150, 243, 0.4);
+    color: white;
+    text-decoration: none;
+}
+
+.progress-report-btn i {
+    margin-right: 0.5rem;
+    font-size: 1.1em;
+}
+</style>
+{% endblock %}
+
+{% block title %}StudyCore - {{ course[1] }}{% endblock %}

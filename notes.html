@@ -1,0 +1,256 @@
+{% extends "base.html" %}
+
+{% block title %}StudyCore - {{ subtopic }}{% endblock %}
+
+{% block content %}
+<div class="notes-container">
+    <div class="page-header">
+        <a href="{{ previous_url }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Back
+        </a>
+    </div>
+
+    <h1 class="page-title">{{ subtopic }}</h1>
+
+    <div class="notes-content">
+        {% if notes and notes.pages %}
+            {% for page in notes.pages %}
+                <div class="notes-card" {% if not loop.first %}style="display: none;"{% endif %} id="page-{{ page.page_number }}">
+                    {% if page.title %}
+                        <h2 class="notes-card-title">{{ page.title }}</h2>
+                    {% endif %}
+
+                    {% for section in page.sections %}
+                        <div class="section">
+                            <h3 class="section-heading">{{ section.heading }}</h3>
+                            
+                            {% for content_item in section.content %}
+                                <div class="content-item">
+                                    <h4 class="content-title">{{ content_item.title }}</h4>
+                                    <div class="content-text">{{ content_item.text | safe }}</div>
+                                    
+                                    {% if content_item.image %}
+                                        <img src="{{ content_item.image }}" alt="{{ content_item.title }}" class="content-image">
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+            {% if notes.pages|length > 1 %}
+                <div class="page-navigation">
+                    <div class="pagination-container">
+                        <button id="prevButton" class="btn btn-primary" disabled>
+                            <i class="fas fa-arrow-left"></i> Previous
+                        </button>
+                        <div id="pageCounter" class="page-counter">Page 1 of {{ notes.pages|length }}</div>
+                        <button id="nextButton" class="btn btn-primary">
+                            Next <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            {% endif %}
+        {% else %}
+            <div class="notes-card">
+                <p class="no-notes">No notes available for this topic yet.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<style>
+/* Container styles */
+.notes-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 100;
+    background-color: var(--bg-primary);
+}
+
+.page-title {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+/* Page header */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+    margin-bottom: 1rem;
+}
+
+/* Notes card styles */
+.notes-card {
+    background: var(--card-dark);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 4px var(--card-shadow);
+    margin-bottom: 2rem;
+}
+
+.notes-card-title {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+.section {
+    margin-bottom: 2rem;
+}
+
+.section-heading {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.content-item {
+    margin-bottom: 1.5rem;
+}
+
+.content-title {
+    color: var(--primary-color);
+    margin-bottom: 0.8rem;
+    font-size: 1.2rem;
+}
+
+.content-text {
+    color: var(--text-primary);
+    line-height: 1.6;
+    white-space: pre-line;
+    font-size: 1rem;
+}
+
+.content-image {
+    max-width: 100%;
+    margin: 1.5rem 0;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 4px var(--card-shadow);
+}
+
+/* Pagination styles */
+.page-navigation {
+    margin-top: 2rem;
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.page-counter {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    text-align: center;
+    flex: 1;
+}
+
+/* Button styles */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: var(--text-primary);
+}
+
+.btn-primary:hover {
+    background: var(--primary-color);
+    transform: translateY(-5px);
+}
+
+.btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: var(--card-dark);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary {
+    background: var(--card-dark);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+}
+
+.no-notes {
+    text-align: center;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    margin: 2rem 0;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    if (document.getElementById('prevButton')) {
+        const totalPages = {{ notes.pages|length if notes and notes.pages else 1 }};
+        let currentPage = 1;
+        
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
+        const pageCounter = document.getElementById('pageCounter');
+        
+        function updatePagination() {
+            prevButton.disabled = currentPage === 1;
+            nextButton.disabled = currentPage === totalPages;
+            pageCounter.textContent = `Page ${currentPage} of ${totalPages}`;
+            
+            for (let i = 1; i <= totalPages; i++) {
+                const page = document.getElementById(`page-${i}`);
+                if (page) {
+                    page.style.display = 'none';
+                }
+            }
+            
+            const currentPageElement = document.getElementById(`page-${currentPage}`);
+            if (currentPageElement) {
+                currentPageElement.style.display = 'block';
+            }
+        }
+        
+        prevButton.addEventListener('click', function() {
+            if (currentPage > 1) {
+                currentPage--;
+                updatePagination();
+            }
+        });
+        
+        nextButton.addEventListener('click', function() {
+            if (currentPage < totalPages) {
+                currentPage++;
+                updatePagination();
+            }
+        });
+        
+        updatePagination();
+    }
+});
+</script>
+{% endblock %} 

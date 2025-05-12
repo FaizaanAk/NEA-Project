@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="personalised-test-container">
+    <div class="page-header">
+        <a href="{{ previous_url }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Back
+        </a>
+    </div>
+
+    <div class="test-content">
+        <h2>Personalised Test</h2>
+        
+        {% if can_take_test %}
+            <div class="test-info">
+                <p>This test will be tailored to your learning progress, focusing on areas that need improvement.</p>
+                <ul>
+                    <li>10 questions total (May be less if not enough topics completed)</li>
+                    <li>Focus on your weakest topics</li>
+                    <li>Includes some questions from your stronger areas</li>
+                </ul>
+                <a href="{{ url_for('start_personalised_test', course_id=course_id) }}" class="btn btn-primary btn-large">
+                    <i class="fas fa-play"></i> Take Test
+                </a>
+            </div>
+        {% else %}
+            <div class="not-enough-data">
+                <i class="fas fa-chart-line"></i>
+                <h3>Not Enough Data Yet</h3>
+                <p>You need to complete at least 3 topic quizzes before taking a personalised test.</p>
+                <p>This helps us understand your strengths and areas for improvement.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<style>
+.personalised-test-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.test-content {
+    background: var(--card-dark);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    margin-top: 2rem;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 4px var(--card-shadow);
+}
+
+.test-content h2 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.test-info {
+    text-align: center;
+}
+
+.test-info p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.test-info ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 2rem;
+}
+
+.test-info li {
+    color: var(--text-primary);
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.test-info li:before {
+    content: "✓";
+    color: var(--primary-color);
+    margin-right: 0.5rem;
+}
+
+.btn-large {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+}
+
+.not-enough-data {
+    text-align: center;
+    padding: 2rem;
+}
+
+.not-enough-data i {
+    font-size: 3rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.not-enough-data h3 {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.not-enough-data p {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.not-enough-data .btn-secondary {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    margin-top: 1rem;
+    min-width: 150px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.not-enough-data .btn-secondary i {
+    font-size: 1rem;
+    margin-right: 0.2rem;
+    position: relative;
+    font-size: 0.85rem;
+    margin-right: 0.3rem;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary {
+    background: var(--card-dark);
+    color: var(--text-primary);
+    padding: 0.7rem 1.5rem;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background: var(--background-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+</style>
+{% endblock %}
+
+{% block title %}StudyCore - Personalised Test{% endblock %} 
