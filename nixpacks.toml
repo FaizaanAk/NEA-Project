@@ -7,11 +7,3 @@ nixPkgs = [
   "python312Packages.wheel",        # Ensure wheel is available
   "python312Packages.distutils"     # Critical for building many packages that need compilation
 ]
-
-[phases.install]
-#  Nixpacks will often automatically handle this, but you can add custom commands if needed
-cmds = ["pip install -r requirements.txt"]
-
-[start]
-#  Adjust this to match your application's startup command
-cmd = "python app.py"
