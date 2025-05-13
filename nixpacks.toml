@@ -1,5 +1,12 @@
+
 [phases.setup]
-nixPkgs = ["...", "gcc", "python312"]
+nixPkgs = [
+  "python312"                      # Python 3.12 interpreter
+  "python312Packages.setuptools"    # Ensure setuptools is available
+  "python312Packages.pip"           # Ensure pip is available
+  "python312Packages.wheel"         # Ensure wheel is available
+  "python312Packages.distutils"     # Critical for building many packages that need compilation
+]
 
 [phases.install]
 #  Nixpacks will often automatically handle this, but you can add custom commands if needed
