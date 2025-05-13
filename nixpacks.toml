@@ -6,3 +6,7 @@ nixPkgs = [
   "python312Packages.wheel",
   "python312Packages.distutils"  # <-- this is the key
 ]
+[phases.build]
+commands = [
+  "pip freeze"  # This will list all installed packages in the environment
+]
