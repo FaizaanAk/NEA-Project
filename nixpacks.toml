@@ -1,5 +1,5 @@
 [phases.setup]
-nixPkgs = ["...", "build-essential", "python312"]
+nixPkgs = ["...", "gcc", "python312"]
 
 [phases.install]
 #  Nixpacks will often automatically handle this, but you can add custom commands if needed
