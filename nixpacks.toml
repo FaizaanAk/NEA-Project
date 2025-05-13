@@ -1,10 +1,10 @@
 [phases.setup]
 nixPkgs = [
   "python312",
+  "python312Packages.distutils",
   "python312Packages.setuptools",
   "python312Packages.pip",
   "python312Packages.wheel",
-  "python312Packages.distutils"  # <-- this is the key
 ]
 [phases.build]
 commands = [
