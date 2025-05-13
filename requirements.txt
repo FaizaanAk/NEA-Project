@@ -1,4 +1,3 @@
-distutils
 flask==3.0.0
 nltk==3.8.1
 numpy==1.24.3
