@@ -1,9 +1,8 @@
 
 [phases.setup]
 nixPkgs = [
-  "python312",                      # Python 3.12 interpreter
-  "python312Packages.setuptools",    # Ensure setuptools is available
-  "python312Packages.pip",           # Ensure pip is available
-  "python312Packages.wheel",        # Ensure wheel is available
-  "python312Packages.distutils"
+  "python311",
+  "python311Packages.setuptools",
+  "python311Packages.pip",
+  "python311Packages.wheel"
 ]
