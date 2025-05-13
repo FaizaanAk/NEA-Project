@@ -5,4 +5,5 @@ nixPkgs = [
   "python312Packages.setuptools",    # Ensure setuptools is available
   "python312Packages.pip",           # Ensure pip is available
   "python312Packages.wheel",        # Ensure wheel is available
+  "python312Packages.distutils"
 ]
