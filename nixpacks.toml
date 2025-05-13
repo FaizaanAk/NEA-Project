@@ -1,12 +1,10 @@
 [phases.setup]
-nixPkgs = [
-  "python312",  # Or python310 if you're using that
-  "python312Packages.setuptools",
-  "python312Packages.pip",
-  "python312Packages.wheel",
-  "python312Packages.distutils"
-]
-[phases.build]
-commands = [
-  "pip freeze"  # This will list all installed packages in the environment
-]
+nixPkgs = ["...", "build-essential", "python312"]
+
+[phases.install]
+#  Nixpacks will often automatically handle this, but you can add custom commands if needed
+cmds = ["pip install -r requirements.txt"]
+
+[start]
+#  Adjust this to match your application's startup command
+cmd = "python app.py"
