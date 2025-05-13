@@ -1,0 +1,21 @@
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+# Ignore virtual environments
+.venv/
+env/
+venv/
+
+# Ignore large files
+static/images/
+*.jpg
+*.png
+*.jpeg
+*.gif
+
+# Ignore model cache and data
+.cache/
+*.pt
+*.bin
+*.csv
